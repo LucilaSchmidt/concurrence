@@ -39,18 +39,36 @@ public class BookingService {
     private KeyMaker keyMaker;
 
     public String reserve(BookingRequestDTO request) {
+        // LOGGER.info(String.format(PROCESSING_REQUEST, request));
+        // List<LocalDateTime> days = DateUtils.getDatesRange(request.getSince(), request.getUntil());
+        //
+        // Semaphore semaphore = this.semaphoreManager.create(request.getRequestId());
+        // if(semaphore.lock()){
+        // try{
+        // List<HotelInfo> hotels = this.hotelsService.getHotelsInfoForDays(request.getHotelId(), days);
+        // boolean hasDisponibility = Iterables.all(hotels, DISPONIBILITY_PREDICATE);
+        // if (hasDisponibility) {
+        // String bookingId = this.keyMaker.makeBookingId(request.getRequestId());
+        // this.doReserve(hotels, bookingId);
+        //
+        // this.bookingDAO.save(bookingId, request);
+        // this.hotelsService.saveHotels(hotels);
+        //
+        // return bookingId;
+        // } else {
+        // throw new BookingServiceException("Cannot process booking");
+        // }
+        // }
+        // finally{
+        // semaphore.unlock();
+        // }
+
+
+
         LOGGER.info(String.format(PROCESSING_REQUEST, request));
-
-
-
         List<LocalDateTime> days = DateUtils.getDatesRange(request.getSince(), request.getUntil());
 
-
-
         List<HotelInfo> hotels = this.hotelsService.getHotelsInfoForDays(request.getHotelId(), days);
-
-
-
         boolean hasDisponibility = Iterables.all(hotels, DISPONIBILITY_PREDICATE);
 
         if (hasDisponibility) {
