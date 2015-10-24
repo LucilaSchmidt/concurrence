@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="ankaa-handler-unit-test" verbose="1" parallel="classes" thread-count="2">
+	<test name="domainTests">
+		<packages>
+			<package name="com.despegar.university.exercises.concurrence.*" />
+		</packages>
+	</test>
+</suite>

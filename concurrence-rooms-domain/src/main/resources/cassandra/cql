@@ -1,0 +1,6 @@
+CREATE KEYSPACE Rooms_ with placement_strategy = 'org.apache.cassandra.locator.SimpleStrategy' and strategy_options = {replication_factor:1};
+
+USE Rooms_;
+
+CREATE COLUMN FAMILY HotelValues with comparator=UTF8Type and column_metadata=[{column_name:value, validation_class:BytesType}] and compression_options={sstable_compression:LZ4Compressor, chunk_length_kb:64};
+CREATE COLUMN FAMILY BookingValues with comparator=UTF8Type and column_metadata=[{column_name:value, validation_class:BytesType}] and compression_options={sstable_compression:LZ4Compressor, chunk_length_kb:64};

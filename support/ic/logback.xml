@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+	<jmxConfigurator />	
+
+	<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+		<resetJUL>true</resetJUL>
+	</contextListener>
+
+	<conversionRule conversionWord="oneLineEx"
+		converterClass="com.despegar.cfa.ids.common.domain.utils.log.OneLineExceptionConverter" />
+
+	<appender name="udp"
+		class="com.despegar.library.logging.logback.UdpAppender">
+		<host>vmcampodonico.servers.despegar.it</host>
+		<port>32207</port>
+		<layout>
+			<pattern>\(${HOSTNAME}\) %d %-5level [%X{uow}] [%X{requestId}] [%thread] %logger{55} - %msg %oneLineEx</pattern>
+		</layout>
+	</appender>
+
+	<appender name="async" class="ch.qos.logback.classic.AsyncAppender">
+		<appender-ref ref="udp" />
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="async" />
+	</root>
+
+</configuration>

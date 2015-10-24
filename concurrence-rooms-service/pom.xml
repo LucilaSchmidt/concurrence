@@ -1,0 +1,165 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<parent>
+		<groupId>com.despegar.university.exercises</groupId>
+		<artifactId>concurrence-rooms</artifactId>
+		<version>0.1-TEAM_A-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>concurrence-rooms-service</artifactId>
+	<packaging>jar</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.despegar.university.exercises</groupId>
+			<artifactId>concurrence-rooms-domain</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.despegar.cfa.ids.common</groupId>
+		    <artifactId>cfa-ids-common-domain</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlet</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlets</artifactId>
+		</dependency>	
+		
+		<dependency>
+			<groupId>com.despegar.library</groupId>
+			<artifactId>api-contract</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.despegar.cloudia</groupId>
+			<artifactId>cloudia-cluster-info</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.despegar.library</groupId>
+			<artifactId>logging</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>log4j</artifactId>
+					<groupId>log4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.despegar.library</groupId>
+			<artifactId>health-check</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>newrelic-api</artifactId>
+					<groupId>newrelic</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.despegar.library</groupId>
+			<artifactId>routing</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>log4j</artifactId>
+					<groupId>log4j</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>slf4j-log4j12</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.despegar.library</groupId>
+			<artifactId>threading</artifactId>
+		</dependency>	
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>		
+		
+		<dependency>
+			<groupId>com.despegar.api</groupId>
+			<artifactId>api-doc</artifactId>
+            <version>1.0.63</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<scope>test</scope>
+		</dependency>	
+		
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+	</dependencies>
+
+	<build>
+		<finalName>hconcurrence-rooms-service</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+		</resources>
+		<plugins>
+            <plugin>
+                <groupId>com.despegar.deploys</groupId>
+                <artifactId>cloudia-java8-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>ic</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>tar</goal>
+                        </goals>
+                        <configuration>
+                        	<mainClass>com.despegar.university.exercises.concurrence.service.ConcurrenceApplication</mainClass>
+                            <applicationArguments>9290</applicationArguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+		</plugins>
+	</build>
+
+</project>

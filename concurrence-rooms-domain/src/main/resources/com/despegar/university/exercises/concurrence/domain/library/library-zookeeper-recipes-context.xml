@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+	
+	<bean name="zkConnector" class="com.despegar.cfa.library.zookeeperrecipes.connector.ZKConnector" >
+		<constructor-arg value="${zookeeper.connector.connectstring}"/>
+	</bean>
+	
+	<bean name="configurationManager" class="com.despegar.cfa.library.zookeeperrecipes.recipes.configurations.ConfigurationManager" >
+		<constructor-arg ref="zkConnector"/>
+		<constructor-arg ref="configurationLoader"/>
+		<constructor-arg value="${zookeeper.configuration.path}"/>
+	</bean>
+	
+	<bean name="configurationLoader" class="com.despegar.cfa.library.zookeeperrecipes.recipes.configurations.ConfigurationLoader">
+		<property name="envFilesPaths">
+			<list>
+				<value>${zookeeper.configuration.envfile.path}</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean name="semaphoreManager" class="com.despegar.cfa.library.zookeeperrecipes.recipes.semaphore.SemaphoreManager" >
+		<constructor-arg value="${zookeeper.semaphore.path}"/>
+		<constructor-arg ref="zkConnector"/>
+		<constructor-arg value="${zookeeper.semaphore.timeout:3000}"/>
+	</bean>	
+
+	<bean name="sharedValueManager" class="com.despegar.cfa.library.zookeeperrecipes.recipes.sharedvalue.SharedValueManager" >
+		<constructor-arg ref="zkConnector"/>
+		<constructor-arg value="${zookeeper.sharedvalue.path}"/>
+	</bean>	
+
+</beans>

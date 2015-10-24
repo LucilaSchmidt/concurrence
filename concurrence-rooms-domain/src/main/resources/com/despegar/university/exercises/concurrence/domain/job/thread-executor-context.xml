@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<bean name="threadExecutorPusher" class="com.despegar.library.threading.spring.TraceAwareExecutorServiceFactoryBean">
+		<property name="corePoolSize" value="${handler.job.push.executor.corepoolsize}" />
+		<property name="maxPoolSize" value="${handler.job.push.executor.maxpoolsize}" />
+		<property name="queueCapacity" value="${handler.job.push.executor.queuecapacity}" />
+	</bean>
+	
+	<bean name="threadExecutorSubscriber" class="com.despegar.library.threading.spring.TraceAwareExecutorServiceFactoryBean">
+		<property name="corePoolSize" value="${handler.job.subscriber.executor.corepoolsize}" />
+		<property name="maxPoolSize" value="${handler.job.subscriber.executor.maxpoolsize}" />
+		<property name="queueCapacity" value="${handler.job.subscriber.executor.queuecapacity}" />
+	</bean>
+	
+	<bean name="threadExecutorSender" class="com.despegar.library.threading.spring.TraceAwareExecutorServiceFactoryBean">
+		<property name="corePoolSize" value="${handler.job.sender.executor.corepoolsize}" />
+		<property name="maxPoolSize" value="${handler.job.sender.executor.maxpoolsize}" />
+		<property name="queueCapacity" value="${handler.job.sender.executor.queuecapacity}" />
+	</bean>
+		
+</beans>
